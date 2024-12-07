@@ -1,37 +1,39 @@
 @startuml
-'https://plantuml.com/activity-diagram-beta
-
 start
-:ClickServlet.handleRequest();
-:new page;
-if (Page.onSecurityCheck) then (true)
-  :Page.onInit();
-  if (isForward?) then (no)
-    :Process controls;
-    if (continue processing?) then (no)
-      stop
-    endif
+:Usuario solicita información de transporte;
 
-    if (isPost?) then (yes)
-      :Page.onPost();
-    else (no)
-      :Page.onGet();
-    endif
-    :Page.onRender();
-  endif
-else (false)
+:Sistema recibe la solicitud;
+
+:Invoca TransporteFactory para obtener el transporte;
+
+if (¿Transporte existe?) then (Sí)
+    :TransporteFactory crea instancia de Transporte;
+    :Obtiene detalles del transporte;
+    :Retorna DatosTransporte;
+else (No)
+    :Error: Transporte no encontrado;
+    stop
 endif
 
-if (do redirect?) then (yes)
-  :redirect process;
-else
-  if (do forward?) then (yes)
-    :Forward request;
-  else (no)
-    :Render page template;
-  endif
-endif
+:Sistema presenta Información General al Usuario;
+
+:Usuario solicita visualizar detalles específicos;
+
+:Sistema consulta DatosTransporte para detalles;
+
+:Retorna Detalles Específicos del Transporte;
+
+:Sistema muestra los Detalles al Usuario;
+
+:Usuario solicita rutas del transporte;
+
+:Sistema solicita rutas a la clase Transporte;
+
+:Transporte obtiene rutas de DatosTransporte;
+
+:Retorna Rutas del Transporte;
+
+:Sistema muestra las Rutas al Usuario;
 
 stop
-
 @enduml

@@ -1,11 +1,27 @@
 @startuml
-'https://plantuml.com/sequence-diagram
+actor Usuario as U
 
-autonumber
+U -> "Sistema Transporte y Movilidad" : Consultar Información de Transporte
+"Sistema Transporte y Movilidad" -> TransporteFactory : obtenerTransporte(tipoTransporte)
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+TransporteFactory -> Transporte : crear instancia Transporte
+Transporte --> DatosTransporte : obtener detalles del transporte
+DatosTransporte --> TransporteFactory : retornar DatosTransporte
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+TransporteFactory --> "Sistema Transporte y Movilidad" : enviar DatosTransporte
+"Sistema Transporte y Movilidad" --> U : mostrar Información General de Transporte
+
+U -> "Sistema Transporte y Movilidad" : Visualizar Detalles de Transporte
+"Sistema Transporte y Movilidad" -> DatosTransporte : solicitar detalles específicos
+DatosTransporte --> "Sistema Transporte y Movilidad" : retornar detalles
+
+"Sistema Transporte y Movilidad" --> U : mostrar Detalles de Transporte
+
+U -> "Sistema Transporte y Movilidad" : Obtener Rutas de Transporte
+"Sistema Transporte y Movilidad" -> Transporte : solicitar Rutas
+Transporte --> DatosTransporte : obtener rutas asociadas
+DatosTransporte --> "Sistema Transporte y Movilidad" : retornar rutas
+
+"Sistema Transporte y Movilidad" --> U : mostrar Rutas de Transporte
 @enduml
+

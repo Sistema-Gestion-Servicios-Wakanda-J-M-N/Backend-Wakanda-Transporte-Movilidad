@@ -1,27 +1,99 @@
 @startuml
-'https://plantuml.com/class-diagram
+package "transporte.domain" {
 
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
+    class Usuario {
+        Long id
+        String nombre
+        String apellidos
+        String email
+        List<String> roles
+    }
 
-List <|-- AbstractList
-Collection <|-- AbstractCollection
+    class Credenciales {
+        Long id
+        String correo
+        String password
+    }
 
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
+    Usuario "1" -- "1" Credenciales : tiene >
 
-class ArrayList {
-Object[] elementData
-size()
+    abstract class Transporte {
+        Long id
+        String nombre
+        String descripcion
+        String condiciones
+        Double costo
+    }
+
+    abstract class TransportePublico {
+        String horario
+        Double precio
+        Boolean accesibleDiscapacidad
+    }
+
+    abstract class TransportePrivado {
+        String propietario
+        Double costoMantenimiento
+        Boolean requiereLicencia
+    }
+
+    Transporte <|-- TransportePublico
+    Transporte <|-- TransportePrivado
+
+    class Metro {
+        Integer numeroLineas
+        Integer capacidadMaxima
+    }
+
+    class Autobus {
+        Integer numeroParadas
+        Integer capacidad
+    }
+
+    class Tren {
+        Integer velocidadMaxima
+        Integer capacidad
+    }
+
+    class Coche {
+        String tipoCombustible
+        Integer numeroAsientos
+    }
+
+    class Moto {
+        Boolean esElectrica
+        Integer cilindrada
+    }
+
+    class Helicoptero {
+        Integer autonomiaVuelo
+        Integer capacidad
+    }
+
+    TransportePublico <|-- Metro
+    TransportePublico <|-- Autobus
+    TransportePublico <|-- Tren
+
+    TransportePrivado <|-- Coche
+    TransportePrivado <|-- Moto
+    TransportePrivado <|-- Helicoptero
+
+    class DatosTransporte {
+        String nombre
+        String descripcion
+        String condiciones
+        String tipo
+        Double costo
+        String detallesExtra
+    }
+
+    class TransporteFactory {
+        <<static>>
+        + DatosTransporte obtenerTransporte(String tipoTransporte)
+    }
+
+    TransporteFactory --> Transporte : crea >
+    Transporte "1" -- "*" DatosTransporte : datos de >
+    Usuario --> DatosTransporte : visualiza >
 }
-
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
-}
-
 @enduml
