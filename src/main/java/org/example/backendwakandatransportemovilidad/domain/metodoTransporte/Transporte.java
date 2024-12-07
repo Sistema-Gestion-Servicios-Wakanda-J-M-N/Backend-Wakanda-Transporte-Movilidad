@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.example.backendwakandatransportemovilidad.domain.metodoTransporte.datos.DatosTransporte;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -31,5 +32,6 @@ public abstract class Transporte {
     private Double costo;
 
     @OneToMany(mappedBy = "transporte", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<DatosTransporte> datosTransporte;
+    private List<DatosTransporte> datosTransporte = new ArrayList<>();
+
 }
