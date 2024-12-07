@@ -29,8 +29,8 @@ public class DatosTransporte {
     @Column
     private String detallesExtra;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "transporte_id")
+    @ManyToOne
+    @JoinColumn(name = "transporte_id", nullable = false)
     private Transporte transporte;
 
     public DatosTransporte(String nombre, String descripcion, String condiciones, String tipo, Double costo, String detallesExtra) {

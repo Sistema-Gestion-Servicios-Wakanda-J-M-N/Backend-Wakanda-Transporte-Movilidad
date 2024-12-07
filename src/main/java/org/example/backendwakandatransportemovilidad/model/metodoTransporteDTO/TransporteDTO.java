@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import org.example.backendwakandatransportemovilidad.model.metodoTransporteDTO.datos.DatosTransporteDTO;
 
 @Getter
 @Setter
@@ -25,4 +26,6 @@ public class TransporteDTO {
 
     @NotNull
     private Double costo;
+
+    private DatosTransporteDTO datosTransporte;
 }
