@@ -15,7 +15,7 @@ services:
       retries: 5
       timeout: 5s
 
-  backend_wakanda_agua:
+  backend_wakanda_transporte_movilidad:
     build:
       context: ./
     container_name: backend_wakanda_transporte_movilidad
