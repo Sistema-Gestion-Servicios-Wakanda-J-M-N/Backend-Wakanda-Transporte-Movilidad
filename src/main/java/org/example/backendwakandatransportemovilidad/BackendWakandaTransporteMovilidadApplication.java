@@ -103,27 +103,8 @@ public class BackendWakandaTransporteMovilidadApplication {
             Long helicopteroId = transporteService.create(helicopteroDTO);
             System.out.println("Helicóptero creado con ID: " + helicopteroId);
 
-            // 2. Obtener todos los transportes
-            System.out.println("\n--- Obtener Todos los Transportes ---");
-            transporteService.getAll().forEach(System.out::println);
-
-            // 3. Actualizar un transporte
-            System.out.println("\n--- Actualización del Metro ---");
-            metroDTO.setNombre("Metro Actualizado");
-            transporteService.update(metroId, metroDTO);
-            System.out.println("Metro actualizado con ID: " + metroId);
-
-            // 4. Eliminar un transporte
-            System.out.println("\n--- Eliminación del Helicóptero ---");
-            transporteService.delete(helicopteroId);
-            System.out.println("Helicóptero eliminado con ID: " + helicopteroId);
-
-            // 5. Obtener todos los transportes después de la eliminación
-            System.out.println("\n--- Obtener Transportes Después de Eliminación ---");
-            transporteService.getAll().forEach(System.out::println);
-
         } catch (Exception e) {
-            System.err.println("Error durante la prueba de CRUD: " + e.getMessage());
+            System.err.println("Error: " + e.getMessage());
         }
     }
 }
